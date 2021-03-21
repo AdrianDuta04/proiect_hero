@@ -11,17 +11,26 @@ use PHPUnit\Framework\TestCase;
 
 class PlayerTypeTest extends TestCase
 {
+    /**
+     * @var PlayerType
+     */
+    public PlayerType $playerMaker;
+
+    protected function setUp (): void
+    {
+        parent::setUp();
+        $this->playerMaker = new PlayerType();
+    }
+
     public function testCanCreateHero ()
     {
-        $playerMaker = new PlayerType();
-        $hero = $playerMaker->createPlayer('hero', 'name');
+        $hero = $this->playerMaker->createPlayer('hero', 'name');
         $this->assertInstanceOf(Hero::class, $hero);
     }
 
     public function testCanCreateBeast ()
     {
-        $playerMaker = new PlayerType();
-        $beast = $playerMaker->createPlayer('beast', 'name');
+        $beast = $this->playerMaker->createPlayer('beast', 'name');
         $this->assertInstanceOf(Beast::class, $beast);
     }
 }

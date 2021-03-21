@@ -10,27 +10,36 @@ use PHPUnit\Framework\TestCase;
 
 class BattlegroundTest extends TestCase
 {
+    /**
+     * @var Battleground
+     */
+    public Battleground $battleGround;
+
+    protected function setUp (): void
+    {
+        parent::setUp();
+        $this->battleGround = new BattleGround(new Hero('nume'), new Beast('Nume'));
+    }
+
     public function testSetPlayer ()
     {
-        $battleGround = new BattleGround(new Hero('nume'), new Beast('Nume'));
         $hero = new Hero('nume2');
-        $battleGround->setPlayer1($hero);
-        $this->assertSame($hero, $battleGround->getPlayer1());
+        $this->battleGround->setPlayer1($hero);
+        $this->assertSame($hero, $this->battleGround->getPlayer1());
     }
 
     public function testSetTurn ()
     {
-        $battleGround = new BattleGround(new Hero('nume'), new Beast('Nume'));
-        $battleGround->setPlayerTurn("player1");
-        $turns = $battleGround->getTurns();
+        $this->battleGround->setPlayerTurn("player1");
+        $turns = $this->battleGround->getTurns();
         $this->assertEquals(1, $turns['player1']);
     }
 
     public function testIsPlayerTurn ()
     {
-        $battleGround = new BattleGround(new Hero('nume'), new Beast('Nume'));
-        $battleGround->setPlayerTurn("player1");
-        $this->assertTrue($battleGround->isPlayerTurn('player1'));
+
+        $this->battleGround->setPlayerTurn("player1");
+        $this->assertTrue($this->battleGround->isPlayerTurn('player1'));
 
     }
 
