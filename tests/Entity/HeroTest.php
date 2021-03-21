@@ -9,28 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class HeroTest extends TestCase
 {
-    public function testDiesInBattle ()
-    {
-        $hero = new Hero('nume');
-        $hero->setHealth(-2);
-        $this->assertTrue($hero->diesInBattle());
-    }
-
-    public function testCalculateDamage ()
-    {
-        $hero = new Hero('nume');
-        $actualDamage = $hero->getStrength() - 23;
-        $this->assertEquals($actualDamage, $hero->calculateDamage(23));
-    }
-
-    public function testReceiveDamage ()
-    {
-        $hero = new Hero('nume');
-        $damage = 23;
-        $health = $hero->getHealth() - $damage;
-        $hero->receiveDamage($damage);
-        $this->assertEquals($health, $hero->getHealth());
-    }
 
     public function testMagicShield ()
     {

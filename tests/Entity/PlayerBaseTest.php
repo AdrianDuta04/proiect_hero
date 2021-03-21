@@ -23,7 +23,22 @@ class PlayerBaseTest extends TestCase
 
     public function testCalculateDamage ()
     {
-        $damage = 5;
-        $this->assertEquals($this->player->getStrength() - $damage, $this->player->calculateDamage($damage));
+        $defence = 5;
+        $this->assertEquals($this->player->getStrength() - $defence, $this->player->calculateDamage($defence));
+    }
+
+    public function testDiesInBattle ()
+    {
+        $this->player->setHealth(-2);
+        $this->assertTrue($this->player->diesInBattle());
+    }
+
+    public function testReceiveDamage ()
+    {
+
+        $damage = 23;
+        $health = $this->player->getHealth() - $damage;
+        $this->player->receiveDamage($damage);
+        $this->assertEquals($health, $this->player->getHealth());
     }
 }
