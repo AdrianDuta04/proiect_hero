@@ -20,17 +20,18 @@ class HeroTest extends TestCase
         $this->hero = new Hero('nume');
     }
 
-    public function testMagicShield ()
+    public function testMagicShield ()//schimba nume
     {
-        $damage = 23;
-        $health = $this->hero->getHealth() - $damage;
-        $this->hero->magicShield($damage * 2);
+        $damage = 46;
+        $health = $this->hero->getHealth() - $damage / 2;
+        $this->hero->magicShield($damage);
         $this->assertEquals($health, $this->hero->getHealth());
     }
 
     public function testRapidStrike ()
     {
         $beast = new Beast('bestie');
+//        $damage = $this->hero->calculateDamage($beast->getDefence());
         $this->hero->setStrength($beast->getDefence() + 1);
         $health = $beast->getHealth() - 2;
         $this->hero->rapidStrike($beast);

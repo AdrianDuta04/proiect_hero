@@ -4,7 +4,6 @@
 namespace App\Entity;
 
 
-use PhpParser\Node\Stmt\Echo_;
 
 class Battleground
 {
@@ -17,17 +16,19 @@ class Battleground
      * Battleground constructor.
      * @param PlayerBase $hero
      * @param PlayerBase $beast
+     * @param int $numberOfRounds
      */
-    public function __construct (PlayerBase $hero, PlayerBase $beast)
+    public function __construct (PlayerBase $hero, PlayerBase $beast, int $numberOfRounds = 20)
     {
-        $this->setPlayer1($hero);
-        $this->setPlayer2($beast);
+        $this->player1 = ($hero);
+        $this->player2 = ($beast);
+        $this->numberOfRounds = $numberOfRounds;
     }
 
     /**
      * @return mixed
      */
-    public function getPlayer1 ()
+    public function getPlayer1 (): PlayerBase
     {
         return $this->player1;
     }
@@ -43,7 +44,7 @@ class Battleground
     /**
      * @return mixed
      */
-    public function getPlayer2 ()
+    public function getPlayer2 (): PlayerBase
     {
         return $this->player2;
     }
@@ -80,7 +81,7 @@ class Battleground
         return $this->turns;
     }
 
-    public function setPlayerTurn (string $player)
+    public function setPlayerTurn (string $player)//playername si cand construiesc battleground pun numele in array ca si cheie
     {
 
         $this->turns[$player] = 1;
@@ -92,52 +93,53 @@ class Battleground
 
     }
 
-    public function isPlayerTurn ($player): bool
+    public function isPlayerTurn ($player): bool //type
     {
         return $this->turns[$player] == 1;
     }
 
-    public function battle ()
+    public function battle ()//scoate  geter
     {
+        $this->setFirstAttacker();
         $iterator = 0;
-        while ($iterator < $this->getNumberOfRounds()) {
+        while ($iterator < $this->numberOfRounds) {
             if ( $this->isPlayerTurn('player1') ) {
-                $this->getPlayer1()->attack($this->getPlayer2());
-                if ( $this->getPlayer2()->diesInBattle() ) {
-                    echo $this->getPlayer1()->getName() . " wins" . PHP_EOL;
+                $this->player1->attack($this->player2);
+                if ( $this->player2->diesInBattle() ) {
+                    echo $this->player1->getName() . " wins" . PHP_EOL;
                     break;
                 }
                 $this->setPlayerTurn('player2');
             } else {
-                $this->getPlayer2()->attack($this->getPlayer1());
-                if ( $this->getPlayer1()->diesInBattle() ) {
-                    echo $this->getPlayer2()->getName() . " wins" . PHP_EOL;
+                $this->player2->attack($this->player1);
+                if ( $this->player1->diesInBattle() ) {
+                    echo $this->player2->getName() . " wins" . PHP_EOL;
                     break;
                 }
                 $this->setPlayerTurn("player1");
             }
             echo "\n";
-            $iterator++;
+            $iterator++;//adauga egal
         }
     }
 
-    public function setFirstAttacker ()
+    public function setFirstAttacker (): void
     {
-
-        if ( $this->getPlayer1()->getSpeed() > $this->getPlayer2()->getSpeed() ) {
-            echo $this->getPlayer1()->getName() . " will begin the battle" . PHP_EOL;
+        if ( $this->player1->getSpeed() > $this->player2->getSpeed() ) {
+            echo $this->player1->getName() . " will begin the battle" . PHP_EOL;
             $this->setPlayerTurn('player1');
-        } else if ( $this->getPlayer1()->getSpeed() < $this->getPlayer2()->getSpeed() ) {
-            echo $this->getPlayer2()->getName() . " will begin the battle" . PHP_EOL;
-            $this->setPlayerTurn('player2');
-        } else {
-            if ( $this->getPlayer1()->getLuck() > $this->getPlayer2()->getLuck() ) {
-                echo $this->getPlayer1()->getName() . " will begin the battle" . PHP_EOL;
-                $this->setPlayerTurn('player1');
-            } else {
-                echo $this->getPlayer2()->getName() . " will begin the battle" . PHP_EOL;
+        } else
+            if ( $this->player1->getSpeed() < $this->player2->getSpeed() ) {
+                echo $this->player2->getName() . " will begin the battle" . PHP_EOL;
                 $this->setPlayerTurn('player2');
+            } else {
+                if ( $this->player1->getLuck() > $this->player2->getLuck() ) {
+                    echo $this->player1->getName() . " will begin the battle" . PHP_EOL;
+                    $this->setPlayerTurn('player1');
+                } else {
+                    echo $this->player2->getName() . " will begin the battle" . PHP_EOL;
+                    $this->setPlayerTurn('player2');
+                }
             }
-        }
     }
 }

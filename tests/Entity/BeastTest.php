@@ -19,7 +19,6 @@ class BeastTest extends TestCase
         parent::setUp();
         $this->beast = new Beast('bestie');
     }
-
     public function testAttack ()
     {
         $hero = new Hero('nume');

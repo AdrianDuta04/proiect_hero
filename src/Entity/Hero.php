@@ -22,11 +22,11 @@ class Hero extends PlayerBase
     {
         echo "A great Hero was created ";
         $this->setName($name);
-        echo "His name is " . $this->getName() . "\n";
+        echo "His name is " . $this->name . "\n";
         parent::__construct();
     }
 
-    public function attack (playerBase $player)
+    public function attack (PlayerBase $player)
     {
         echo "The Hero attacks \n";
         if ( $this->canUseSpecialAttack() ) {

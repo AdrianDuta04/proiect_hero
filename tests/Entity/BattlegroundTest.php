@@ -21,13 +21,6 @@ class BattlegroundTest extends TestCase
         $this->battleGround = new BattleGround(new Hero('nume'), new Beast('Nume'));
     }
 
-    public function testSetPlayer ()
-    {
-        $hero = new Hero('nume2');
-        $this->battleGround->setPlayer1($hero);
-        $this->assertSame($hero, $this->battleGround->getPlayer1());
-    }
-
     public function testSetTurn ()
     {
         $this->battleGround->setPlayerTurn("player1");
@@ -37,10 +30,8 @@ class BattlegroundTest extends TestCase
 
     public function testIsPlayerTurn ()
     {
-
         $this->battleGround->setPlayerTurn("player1");
         $this->assertTrue($this->battleGround->isPlayerTurn('player1'));
-
     }
 
     public function testSetFirstAttackerBasedOnSpeed ()
@@ -66,6 +57,5 @@ class BattlegroundTest extends TestCase
         $battle->setFirstAttacker();
         $this->assertTrue($battle->isPlayerTurn('player2'));
     }
-
-
+    //adauga teste battle -> castiga player 1 , castiga player2 , egal
 }

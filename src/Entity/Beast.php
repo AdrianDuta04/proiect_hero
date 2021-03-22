@@ -22,7 +22,7 @@ class Beast extends PlayerBase
     {
         echo "A great Beast was created ";
         $this->setName($name);
-        echo "His name is " . $this->getName() . "\n";
+        echo "His name is " . $this->name . "\n";
         parent::__construct();
     }
 

@@ -20,7 +20,6 @@ class PlayerBaseTest extends TestCase
         parent::setUp();
         $this->player = $this->getMockForAbstractClass(PlayerBase::class);
     }
-
     public function testCalculateDamage ()
     {
         $defence = 5;
@@ -35,7 +34,6 @@ class PlayerBaseTest extends TestCase
 
     public function testReceiveDamage ()
     {
-
         $damage = 23;
         $health = $this->player->getHealth() - $damage;
         $this->player->receiveDamage($damage);

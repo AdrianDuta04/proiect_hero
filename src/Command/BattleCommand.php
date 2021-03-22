@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Battleground;
+use App\Entity\PlayerFactory;
 use App\Entity\PlayerType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,12 +22,10 @@ class BattleCommand extends Command
 
     public function execute (InputInterface $input, OutputInterface $output): int
     {
-        $playerMaker = new PlayerType();
+        $playerMaker = new PlayerFactory();
         $Orderus = $playerMaker->createPlayer("hero", "Orderus");
         $BeastOfEmagia = $playerMaker->createPlayer("beast", "BeastOfEmagia");
-        $emagia = new Battleground($Orderus, $BeastOfEmagia);
-        $emagia->setFirstAttacker();;
-        $emagia->setNumberOfRounds(30);
+        $emagia = new Battleground($Orderus, $BeastOfEmagia, 20);
         $emagia->battle();
         return Command::SUCCESS;
     }

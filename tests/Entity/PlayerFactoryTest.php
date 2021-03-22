@@ -5,21 +5,22 @@ namespace App\Tests\Entity;
 
 use App\Entity\Beast;
 use App\Entity\Hero;
+use App\Entity\PlayerFactory;
 use App\Entity\PlayerType;
 use PHPUnit\Framework\TestCase;
 
 
-class PlayerTypeTest extends TestCase
+class PlayerFactoryTest extends TestCase
 {
     /**
-     * @var PlayerType
+     * @var PlayerFactory
      */
-    public PlayerType $playerMaker;
+    public PlayerFactory $playerMaker;
 
     protected function setUp (): void
     {
         parent::setUp();
-        $this->playerMaker = new PlayerType();
+        $this->playerMaker = new PlayerFactory();
     }
 
     public function testCanCreateHero ()

@@ -6,24 +6,24 @@ namespace App\Entity;
 
 abstract class PlayerBase
 {
-    protected int $maxHealth = 0;
-    protected int $maxStrength = 0;
-    protected int $maxDefence = 0;
-    protected int $maxSpeed = 0;
-    protected int $maxLuck = 0;
+    protected int $maxHealth;
+    protected int $maxStrength;
+    protected int $maxDefence;
+    protected int $maxSpeed;
+    protected int $maxLuck;
 
-    protected int $minHealth = 0;
-    protected int $minStrength = 0;
-    protected int $minDefence = 0;
-    protected int $minSpeed = 0;
-    protected int $minLuck = 0;
+    protected int $minHealth;
+    protected int $minStrength;
+    protected int $minDefence;
+    protected int $minSpeed;
+    protected int $minLuck;
 
-    protected int $health = 0;
-    protected int $strength = 0;
-    protected int $defence = 0;
-    protected int $speed = 0;
-    protected int $luck = 0;
-    protected string $name = "";
+    protected int $health;//scoate default
+    protected int $strength;
+    protected int $defence;
+    protected int $speed;
+    protected int $luck;
+    protected string $name;
 
     abstract public function attack (PlayerBase $player);
 
@@ -31,11 +31,11 @@ abstract class PlayerBase
 
     public function __construct ()
     {
-        $this->setHealth(rand($this->getMinHealth(), $this->getMaxHealth()));
-        $this->setStrength(rand($this->getMinStrength(), $this->getMaxStrength()));
-        $this->setDefence(rand($this->getMinDefence(), $this->getMaxDefence()));
-        $this->setSpeed(rand($this->getMinSpeed(), $this->getMaxSpeed()));
-        $this->setLuck(rand($this->getMinLuck(), $this->getMaxLuck()));
+        $this->health = (rand($this->getMinHealth(), $this->getMaxHealth()));
+        $this->strength = (rand($this->getMinStrength(), $this->getMaxStrength()));
+        $this->defence = (rand($this->getMinDefence(), $this->getMaxDefence()));
+        $this->speed = (rand($this->getMinSpeed(), $this->getMaxSpeed()));
+        $this->luck = (rand($this->getMinLuck(), $this->getMaxLuck()));
     }
 
     /**
@@ -159,14 +159,6 @@ abstract class PlayerBase
     }
 
     /**
-     * @param int $maxHealth
-     */
-    public function setMaxHealth (int $maxHealth): void
-    {
-        $this->maxHealth = $maxHealth;
-    }
-
-    /**
      * @param int $health
      */
     public function setHealth (int $health): void
@@ -206,7 +198,10 @@ abstract class PlayerBase
         $this->luck = $luck;
     }
 
-    public function getName ()
+    /**
+     * @return string
+     */
+    public function getName (): string
     {
         return $this->name;
     }
@@ -233,7 +228,10 @@ abstract class PlayerBase
         return $this->getHealth() <= 0;
     }
 
-    public function receiveDamage (int $damage)
+    /**
+     * @param int $damage
+     */
+    public function receiveDamage (int $damage): void
     {
         $this->setHealth($this->getHealth() - $damage);
     }
