@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 
+use Exception;
+
 class Hero extends PlayerBase
 {
     protected int $maxHealth = 100;
@@ -17,12 +19,15 @@ class Hero extends PlayerBase
     protected int $minDefence = 45;
     protected int $minSpeed = 40;
     protected int $minLuck = 10;
+    protected array $abilities = [ "magicShield" => 0, "rapidStrike" => 0 ];
 
-    public function __construct ($name = "hero")
+
+    public function __construct ($name = "hero", array $abilities = [ "magicShield" => 0, "rapidStrike" => 0 ])
     {
         echo "A great Hero was created ";
-        $this->setName($name);
+        $this->name = $name;
         echo "His name is " . $this->name . "\n";
+        $this->abilities = $abilities;
         parent::__construct();
     }
 
@@ -44,7 +49,7 @@ class Hero extends PlayerBase
 
     public function canUseSpecialAttack (): bool
     {
-        return rand(1, 10) == 1;
+        return rand(1, 10) == 1 && $this->abilities["rapidStrike"] == 1;
     }
 
     public function rapidStrike (PlayerBase $player)
@@ -57,7 +62,7 @@ class Hero extends PlayerBase
 
     public function canUseSpecialDefence (): bool
     {
-        return rand(1, 5) == 1;
+        return rand(1, 5) == 1 && $this->abilities["magicShield"] == 1;
     }
 
     public function magicShield (int $damage)

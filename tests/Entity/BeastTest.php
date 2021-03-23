@@ -22,10 +22,10 @@ class BeastTest extends TestCase
     public function testAttack ()
     {
         $hero = new Hero('nume');
-        $this->beast->setStrength($hero->getDefence() + 1);
+        $damage = $this->beast->calculateDamage($hero->getDefence());
         $health = $hero->getHealth();
         $this->beast->attack($hero);
-        $this->assertTrue($hero->getHealth() + 1 == $health);
+        $this->assertTrue($hero->getHealth() + $damage == $health);
     }
 
     public function testDefend ()

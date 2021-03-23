@@ -23,8 +23,12 @@ class BattleCommand extends Command
     public function execute (InputInterface $input, OutputInterface $output): int
     {
         $playerMaker = new PlayerFactory();
-        $Orderus = $playerMaker->createPlayer("hero", "Orderus");
-        $BeastOfEmagia = $playerMaker->createPlayer("beast", "BeastOfEmagia");
+        try {
+            $Orderus = $playerMaker->createPlayer("hero", "Orderus", [ "magicShield" => 1, "rapidStrike" => 1 ]);
+            $BeastOfEmagia = $playerMaker->createPlayer("beast", "BeastOfEmagia");
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
         $emagia = new Battleground($Orderus, $BeastOfEmagia, 20);
         $emagia->battle();
         return Command::SUCCESS;
