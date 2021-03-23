@@ -10,6 +10,7 @@ class Battleground
     private PlayerBase $player1;
     private PlayerBase $player2;
     private int $numberOfRounds = 20;
+    protected PlayerBase $winner;
     private $turns = [ "player1" => 0, "player2" => 0 ];
 
     /**
@@ -28,50 +29,11 @@ class Battleground
     /**
      * @return mixed
      */
-    public function getPlayer1 (): PlayerBase
-    {
-        return $this->player1;
-    }
-
-    /**
-     * @param mixed $player1
-     */
-    public function setPlayer1 ($player1): void
-    {
-        $this->player1 = $player1;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPlayer2 (): PlayerBase
     {
         return $this->player2;
     }
 
-    /**
-     * @param mixed $player2
-     */
-    public function setPlayer2 ($player2): void
-    {
-        $this->player2 = $player2;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumberOfRounds (): int
-    {
-        return $this->numberOfRounds;
-    }
-
-    /**
-     * @param int $numberOfRounds
-     */
-    public function setNumberOfRounds (int $numberOfRounds): void
-    {
-        $this->numberOfRounds = $numberOfRounds;
-    }
 
     /**
      * @return array
@@ -98,7 +60,7 @@ class Battleground
         return $this->turns[$player] == 1;
     }
 
-    public function battle ()//scoate  geter
+    public function battle ()
     {
         $this->setFirstAttacker();
         $iterator = 0;
@@ -107,6 +69,7 @@ class Battleground
                 $this->player1->attack($this->player2);
                 if ( $this->player2->diesInBattle() ) {
                     echo $this->player1->getName() . " wins" . PHP_EOL;
+                    $this->winner = $this->player1;
                     break;
                 }
                 $this->setPlayerTurn('player2');
@@ -114,13 +77,24 @@ class Battleground
                 $this->player2->attack($this->player1);
                 if ( $this->player1->diesInBattle() ) {
                     echo $this->player2->getName() . " wins" . PHP_EOL;
+                    $this->winner = $this->player1;
                     break;
                 }
                 $this->setPlayerTurn("player1");
             }
             echo "\n";
-            $iterator++;//adauga egal
+            $iterator++;
         }
+        if ( !$this->player1->diesInBattle() && !$this->player2->diesInBattle() )
+            echo "It's a tie";
+    }
+
+    /**
+     * @return PlayerBase
+     */
+    public function getWinner (): PlayerBase
+    {
+        return $this->winner;
     }
 
     public function setFirstAttacker (): void

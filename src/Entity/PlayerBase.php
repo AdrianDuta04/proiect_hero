@@ -6,19 +6,19 @@ namespace App\Entity;
 
 abstract class PlayerBase
 {
-    protected int $maxHealth;
-    protected int $maxStrength;
-    protected int $maxDefence;
-    protected int $maxSpeed;
-    protected int $maxLuck;
+    protected int $maxHealth = 0;
+    protected int $maxStrength = 0;
+    protected int $maxDefence = 0;
+    protected int $maxSpeed = 0;
+    protected int $maxLuck = 0;
 
-    protected int $minHealth;
-    protected int $minStrength;
-    protected int $minDefence;
-    protected int $minSpeed;
-    protected int $minLuck;
+    protected int $minHealth = 0;
+    protected int $minStrength = 0;
+    protected int $minDefence = 0;
+    protected int $minSpeed = 0;
+    protected int $minLuck = 0;
 
-    protected int $health;//scoate default
+    protected int $health;
     protected int $strength;
     protected int $defence;
     protected int $speed;

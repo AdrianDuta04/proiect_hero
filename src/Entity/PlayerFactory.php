@@ -19,6 +19,5 @@ class PlayerFactory
         } else throw new Exception("Invalid Player Format");
 
 
-        // else throw exceptie
     }
 }
