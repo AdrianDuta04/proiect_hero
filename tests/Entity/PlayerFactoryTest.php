@@ -6,7 +6,6 @@ namespace App\Tests\Entity;
 use App\Entity\Beast;
 use App\Entity\Hero;
 use App\Entity\PlayerFactory;
-use App\Entity\PlayerType;
 use PHPUnit\Framework\TestCase;
 
 
