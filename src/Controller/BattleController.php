@@ -28,15 +28,12 @@ class BattleController extends AbstractController
             'command' => 'app:initiate-battle',
         ]);
 
-        // You can use NullOutput() if you don't need the output
         header("Content-type: text/plain");
         $output = new BufferedOutput();
         $application->run($input, $output);
 
-        // return the output, don't use if you used NullOutput()
         $content = $output->fetch();
 
-        // return new Response(""), if you used NullOutput()
         return new Response($content, 200, [ 'Content-type' => 'text/plain' ]);
     }
 }

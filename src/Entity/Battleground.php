@@ -43,7 +43,7 @@ class Battleground
         return $this->turns;
     }
 
-    public function setPlayerTurn (string $player)//playername si cand construiesc battleground pun numele in array ca si cheie
+    public function setPlayerTurn (string $player)
     {
 
         $this->turns[$player] = 1;

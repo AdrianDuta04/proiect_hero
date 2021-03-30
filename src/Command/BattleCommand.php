@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Entity\Battleground;
 use App\Entity\PlayerFactory;
-use App\Entity\PlayerType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
